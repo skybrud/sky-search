@@ -1,7 +1,6 @@
-/* global angular */
-(function () {
+(function() {
 	'use strict';
-
-	angular.module('skySearch',['skyList','core','skyUtils']);
-
+	
+	angular.module('skySearch',['skyList','core']);	
+	
 })();
