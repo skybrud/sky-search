@@ -20,8 +20,6 @@
 				limit:5
 			};
 
-			configuration.api = '/umbraco/api/PhonebookApi/Search/';
-
 			skyList.createInstance('search',configuration).then((list) => {
 				this.query = list.query;
 				this.data = list.results;
