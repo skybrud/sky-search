@@ -6,7 +6,7 @@
 	skySearchDirective.$inject = ['$rootScope', 'skyList','skyQueryString'];
 
 	function skySearchDirective($rootScope, skyList, skyQueryString) {
-		return {
+		let directive = {
 			restrict:'E',
 			templateUrl:'/sky-search/sky-search.template.html',
 			scope:{},
@@ -44,6 +44,8 @@
 				skyList.killInstance('search');
 			});
 		}
+
+		return directive;
 	}
 
 })();
