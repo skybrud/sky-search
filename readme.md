@@ -1,6 +1,6 @@
 # sky-search
 
-Angular-module to for live site-search
+Angular-module for live site-search
 
 Please refer to the code-files for usage and documentation!
 
