@@ -1,0 +1,248 @@
+@import '~styles/variables';
+
+@keyframes sky-search-spinner {
+	from {
+		transform: rotate(0turn);
+	}
+	to {
+		transform: rotate(1turn);
+	}
+}
+
+.sky-search {
+	@include grid(padding-bottom, 2);
+
+	.sky-overlay-toggle {
+		display: block;
+		width: auto;
+		height: auto;
+		opacity: 1;
+		border: 0;
+		margin: 0;
+		padding: 0;
+	}
+}
+
+.search-form {
+	@include grid(margin-top, 3, 10, 20);
+	@include grid(margin-top, 2, 20);
+
+	@include lt(10) {
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+
+	form {
+		width: 100%;
+	}
+
+	label {
+		display: flex;
+		flex-wrap: wrap;
+		width: 100%;
+		position: relative;
+		border-bottom: 2px solid #fff;
+	}
+
+	input {
+		@include grid(height, 3.25);
+		flex-grow: 5;
+		font-size: 40px;
+		line-height: 1;
+		color: #fff;
+		border: 0;
+		background-color: transparent;
+		outline: none;
+
+		@include lt(10) {
+			font-size: 24px;
+		}
+
+		@include placeholder {
+			color: #fff;
+		}
+	}
+
+	button {
+		top: 50%;
+		right: 0;
+		width: 55px;
+		height: 30px;
+		cursor: pointer;
+		display: flex;
+		font-size: $font-small;
+		line-height: 2;
+		font-weight: $medium;
+		align-items: center;
+		justify-content: center;
+		flex-grow: 1;
+		text-transform: uppercase;
+		position: absolute;
+		color: #fff;
+		background-color: $color-blue;
+		transform: translateY(-50%);
+	}
+}
+
+.search-message {
+	@include grid(height, 2.75);
+	@include grid(margin-top margin-bottom, 1, 0, 30);
+	position: relative;
+	display: flex;
+	align-items: center;
+	font-size: 30px;
+	color: #fff;
+	position: relative;
+	text-transform: none;
+	@include lt(10) {
+		font-size: 16px;
+		margin-bottom: 20px;
+	}
+
+	.loading & span {
+		@include grid(margin-left, 0.75);
+	}
+
+	.loading & {
+		&:before {
+			content: '';
+			display: block;
+			width: 40px;
+			height: 40px;
+			border-radius: 20px;
+			border: 2px solid $color-blue-light;
+			border-top-color: transparent;
+			background-color: transparent;
+			animation: sky-search-spinner 0.4s linear infinite;
+			will-change: transform;
+		}
+	}
+}
+
+.search-results {
+	@include grid(margin-bottom, 1.5);
+	@include grid(padding-top);
+	position: relative;
+	padding-top: 30px;
+
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		transition: opacity 0.4s;
+
+		.loading & {
+			opacity: 0.3;
+		}
+	}
+
+	li {
+		@include grid(margin-bottom, 1.5, 10);
+		display: block;
+		width: 100%;
+		padding: 0;
+		margin-left: 0;
+		margin-bottom: 20px;
+	}
+
+	a {
+		display: inline-block;
+		color: #fff;
+		font-size: 30px;
+		line-height: 1.25;
+		text-align: left;
+
+		@include lt(10) {
+			font-size: 20px;
+		}
+
+		/deep/ svg {
+			vertical-align: middle;
+			display: inline-block;
+			margin-left: 0.5em;
+		}
+	}
+
+	p {
+		@include grid(width, 25, 10);
+		color: #fff;
+		@include lt(10) {
+			display: none;
+		}
+	}
+
+	h5 {
+		@include grid(margin-right);
+		display: inline;
+		font-size: 30px;
+		margin-bottom: 5px;
+		text-transform: uppercase;
+		color: #fff;
+		text-transform: none;
+		line-height: 1.2;
+	}
+}
+
+.search-more {
+	@include grid(margin-top, 2);
+	display: flex;
+	justify-content: space-between;
+
+	svg {
+		@include grid(width, 3, 0, 5);
+		@include grid(height, 1.44, 0, 5);
+		@include grid(width, 2, 5, 20);
+		@include grid(height, 0.96, 5, 20);
+		@include grid(width, 1.35, 20);
+		@include grid(height, 0.65, 20);
+		will-change: transform;
+		transition: transform 0.2s;
+		fill: $color-blue-light;
+		flex-shrink: 0;
+		flex-grow: 0;
+	}
+
+	.search-previous,
+	.search-next {
+		display: flex;
+		padding: 5px 15px;
+		border: 0;
+		background-color: transparent;
+		font-size: $font-size;
+		color: #fff;
+	}
+
+	.search-next {
+		margin-left: auto;
+
+		span {
+			@include grid(margin-right, 0.5);
+		}
+
+		@include hover {
+			svg {
+				transform: translateX(20%);
+				fill: #fff;
+			}
+		}
+	}
+
+	.search-previous {
+		flex-direction: row-reverse;
+
+		span {
+			@include grid(margin-left, 0.5);
+		}
+
+		svg {
+			transform: scaleX(-1);
+		}
+
+		@include hover {
+			svg {
+				transform: translateX(-20%) scaleX(-1);
+				fill: #fff;
+			}
+		}
+	}
+}

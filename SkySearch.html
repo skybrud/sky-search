@@ -1,0 +1,77 @@
+<div :class="[{loading: list && list.loading}, 'sky-search']">
+	<div class="search-form">
+		<form @submit.prevent="update">
+			<label>
+				<input
+					type="text"
+					v-model.trim="parameters.keywords"
+					placeholder="Search"
+				/>
+
+				<!-- <button>
+					<span>søg</span>
+				</button> -->
+			</label>
+		</form>
+	</div>
+
+	<div
+		v-if="messageStatus"
+		class="search-message"
+	>
+		<span v-html="messageStatus" />
+	</div>
+
+	<div
+		v-if="list && list.results.items.length"
+		class="search-results"
+	>
+		<ul>
+			<li
+				v-for="item in list.results.items"
+				:key="item.id"
+			>
+				<SkyOverlayToggle
+					name="search"
+					:scrollToTop="true"
+				>
+					<NaLink
+						hover="white"
+						:href="item.url"
+					>
+						<!-- <h5 v-text="item.name" /> -->
+						{{ item.name }}
+					</NaLink>
+				</SkyOverlayToggle>
+
+				<p
+					class="teaser"
+					v-if="item.teaser"
+					v-text="item.teaser"
+				/>
+			</li>
+		</ul>
+	</div>
+
+	<div
+		v-if="list && (list.results.pagination.total > list.results.items.length)"
+		class="search-more"
+	>
+		<button
+			v-if="list.preferences.pagination && (list.results.pagination.offset != 0)"
+			@click="previous"
+			class="search-previous"
+		>
+			<span v-text="messagePrevious"/>
+			<SvgArrow />
+		</button>
+		<button
+			v-if="list.results.items.length >= list.results.pagination.limit"
+			@click="next"
+			class="search-next"
+		>
+			<span v-text="messageNext"/>
+			<SvgArrow />
+		</button>
+	</div>
+</div>
